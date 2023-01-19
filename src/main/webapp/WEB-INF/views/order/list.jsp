@@ -312,7 +312,7 @@
                 </thead>
                 <tbody>
                 <c:forEach items="${orderList }" var="orderList">
-                    <c:if test="${orderList.m_order_status == '승인요청' || orderList.m_order_status == '승인완료'}">
+                    <c:if test="${orderList.m_order_status == '승인요청'}">
                         <tr onclick="orderDetail(this)" data-value="${orderList.m_order_id}" data-bs-toggle="modal"
                             data-bs-target="#orderConfirm" value="" style="cursor: pointer;">
                             <td>${orderList.m_order_id}</td>
@@ -320,7 +320,19 @@
                             <td>${orderList.m_order_buyerName}</td>
 <%--                            <td>${orderList.m_order_buyerCurrency}&nbsp;${orderList.m_order_sumPrice}</td>--%>
                             <td id="${orderList.m_order_id}">${orderList.m_order_buyerCurrency}&nbsp;</td>
-                            <td class="orderStatusValue">${orderList.m_order_status}</td>
+                            <td class="orderStatusValue" style="color: blue">${orderList.m_order_status}</td>
+                        </tr>
+                    </c:if>
+                    <c:if test="${orderList.m_order_status == '승인완료'}">
+                        <tr onclick="orderDetail(this)" data-value="${orderList.m_order_id}" data-bs-toggle="modal"
+                            data-bs-target="#orderConfirm" value="" style="cursor: pointer;">
+                            <td>${orderList.m_order_id}</td>
+                            <td>${orderList.m_buyer_id}</td>
+                            <td>${orderList.m_order_buyerName}</td>
+                                <%--                            <td>${orderList.m_order_buyerCurrency}&nbsp;${orderList.m_order_sumPrice}</td>--%>
+                            <td id="${orderList.m_order_id}">${orderList.m_order_buyerCurrency}&nbsp;</td>
+                            <td class="orderStatusValue" style="color: purple">${orderList.m_order_status}</td>
+
                         </tr>
                     </c:if>
                     <script>
