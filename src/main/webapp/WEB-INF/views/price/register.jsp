@@ -31,6 +31,7 @@
             font-weight: 200;
             background-color: #eeeeee;
         }
+
         h1 {
             font-size: 1.7em;
             margin: 30px 0;
@@ -48,7 +49,7 @@
             height: 55px;
         }
 
-        .table-active{
+        .table-active {
             /*width: 40%;*/
             line-height: 35px;
         }
@@ -60,6 +61,7 @@
             line-height: 39px;
             font-size: 16px;
         }
+
         .tableList {
             background-color: #fff;
             height: 444px;
@@ -87,9 +89,10 @@
             border: none;
             background: transparent;
         }
+
         .addBtn {
             background-color: #598f9b;
-            border-color:#598f9b;
+            border-color: #598f9b;
             padding: 10px 30px;
         }
 
@@ -98,8 +101,6 @@
             background-color: #52727b;
             border-color: #52727b;
         }
-
-
 
 
     </style>
@@ -111,24 +112,27 @@
     </div>
     <div class="col">
         <div class="container">
-        <h1 style="margin-top: 20px">판매가격 작성</h1>
-        <div style="display:flex;">
-            <button style="margin-left: auto; margin-bottom: 10px;" id="resetBtn" class="btn btn-secondary" type="reset">초기화</button>
-        </div>
-        <form action="" method="post" id="formId" name="formId">
-            <table class="table table-bordered">
+            <h1 style="margin-top: 20px">판매가격 작성</h1>
+            <div style="display:flex;">
+                <button style="margin-left: auto; margin-bottom: 10px;" id="resetBtn" class="btn btn-secondary"
+                        type="reset">초기화
+                </button>
+            </div>
+            <form action="" method="post" id="formId" name="formId">
+                <table class="table table-bordered">
 
-                <tbody>
+                    <tbody>
                     <tr>
                         <td class="table-active">제품코드</td>
                         <td>
                             <input class="form-control" id="itemId" type="text" name="m_item_id"
-                                    placeholder="제품 코드를 입력해주세요" autocomplete="off" onchange="itemView()" onkeyup="noSpaceForm(this)">
-<%--                                <datalist id="itemList">--%>
-<%--                                    <c:forEach items="${itemList}" var="itemList">--%>
-<%--                                        <option value="${itemList.m_item_id}">${itemList.m_item_name}</option>--%>
-<%--                                    </c:forEach>--%>
-<%--                                </datalist>--%>
+                                   placeholder="제품 코드를 입력해주세요" autocomplete="off" onchange="itemView()"
+                                   onkeyup="noSpaceForm(this)">
+                                <%--                                <datalist id="itemList">--%>
+                                <%--                                    <c:forEach items="${itemList}" var="itemList">--%>
+                                <%--                                        <option value="${itemList.m_item_id}">${itemList.m_item_name}</option>--%>
+                                <%--                                    </c:forEach>--%>
+                                <%--                                </datalist>--%>
                             </input>
                         </td>
                         <td class="table-active">제품명</td>
@@ -140,12 +144,13 @@
                         <td class="table-active">거래처 코드</td>
                         <td>
                             <input class="form-control" id="buyerId" type="text" name="m_buyer_id"
-                                   placeholder="거래처 코드를 입력해주세요" autocomplete="off" onchange="buyerView()" onkeyup="noSpaceForm(this)" disabled>
-<%--                            <datalist id="buyerList">--%>
-<%--                                <c:forEach items="${buyerList}" var="buyerList" >--%>
-<%--                                    <option value="${buyerList.m_buyer_id}">${buyerList.m_buyer_name}</option>--%>
-<%--                                </c:forEach>--%>
-<%--                            </datalist>--%>
+                                   placeholder="거래처 코드를 입력해주세요" autocomplete="off" onchange="buyerView()"
+                                   onkeyup="noSpaceForm(this)" disabled>
+                                <%--                            <datalist id="buyerList">--%>
+                                <%--                                <c:forEach items="${buyerList}" var="buyerList" >--%>
+                                <%--                                    <option value="${buyerList.m_buyer_id}">${buyerList.m_buyer_name}</option>--%>
+                                <%--                                </c:forEach>--%>
+                                <%--                            </datalist>--%>
                             </input>
                         </td>
                         <td class="table-active">거래처명</td>
@@ -156,74 +161,85 @@
                     <tr>
                         <td class="table-active">통화</td>
                         <td colspan="3">
-                            <input class="form-control" id="buyerCurrency" name="m_price_currency" readonly disabled></input>
+                            <input class="form-control" id="buyerCurrency" name="m_price_currency" readonly
+                                   disabled></input>
                         </td>
                     </tr>
-                </tbody>
-            </table>
-            <table id="inputId" class="table table-bordered">
-                <tbody style="width: 20%">
+                    </tbody>
+                </table>
+                <table id="inputId" class="table table-bordered">
+                    <tbody style="width: 20%">
                     <tr>
                         <td class="table-active">시작일</td>
                         <td>
-                            <input class="form-control reset1" id="m_price_startPeriod" autocomplete="off" type="date" name="m_price_startPeriod"></input>
+                            <input class="form-control reset1" id="m_price_startPeriod" autocomplete="off" type="date"
+                                   name="m_price_startPeriod"></input>
                         </td>
                         <td class="table-active">종료일</td>
                         <td>
-                            <input class="form-control reset1" id="m_price_lastPeriod" autocomplete="off" type="date" name="m_price_lastPeriod" disabled></input>
+                            <input class="form-control reset1" id="m_price_lastPeriod" autocomplete="off" type="date"
+                                   name="m_price_lastPeriod" disabled></input>
                         </td>
                     </tr>
 
                     <tr>
                         <td class="table-active">할인율</td>
                         <td>
-                            <input class="form-control reset1" autocomplete="off" id="discountInput" type="text" maxlength='2' name="m_price_discount" value="0" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></input>
+                            <input class="form-control reset1" autocomplete="off" id="discountInput" type="text"
+                                   maxlength='2' name="m_price_discount" value="0"
+                                   onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></input>
                         </td>
                         <td class="table-active">판매가격(단가)</td>
                         <td>
-                            <input class="form-control reset1" autocomplete="off" id="priceInput" type="text" name="m_price_price" onkeyup="inputNumberFormat(this)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></input>
+                            <input class="form-control reset1" autocomplete="off" id="priceInput" type="text"
+                                   name="m_price_price" onkeyup="inputNumberFormat(this)"
+                                   onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></input>
                         </td>
                     </tr>
                     <tr>
                         <td class="table-active">최종 단가</td>
                         <td colspan="3">
-                            <input class="form-control reset1" id="lastPrice" type="text" name="m_price_lastPrice" readonly></input>
+                            <input class="form-control reset1" id="lastPrice" type="text" name="m_price_lastPrice"
+                                   readonly></input>
                         </td>
                     </tr>
-                </tbody>
-            </table>
-            <div class="row justify-content-center mt-4 mb-4">
-                <input class="btn btn-secondary addBtn col-auto" type="button" id="priceButton" value="판매가 추가"></input>
+                    </tbody>
+                </table>
+                <div class="row justify-content-center mt-4 mb-4">
+                    <input class="btn btn-secondary addBtn col-auto" type="button" id="priceButton"
+                           value="판매가 추가"></input>
+                </div>
+                <%--            <div style="display:none"><button id="resetBtn" type="reset"></button> </div>--%>
+            </form>
+
+            <h2>추가된 가격</h2>
+            <div class="tableList">
+                <table class="table addList ">
+                    <thead>
+                    <tr>
+                        <th scope="col">제품코드</th>
+                        <th scope="col">거래처코드</th>
+                        <th scope="col">시작일</th>
+                        <th scope="col">종료일</th>
+                        <th scope="col">통화</th>
+                        <th scope="col">할인율</th>
+                        <th scope="col">판매단가</th>
+                        <th scope="col">최종단가</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody id="basketList">
+
+                    </tbody>
+                </table>
             </div>
-<%--            <div style="display:none"><button id="resetBtn" type="reset"></button> </div>--%>
-        </form>
-
-        <h2>추가된 가격</h2>
-        <div class="tableList">
-            <table class="table addList ">
-                <thead>
-                <tr>
-                    <th scope="col">제품코드</th>
-                    <th scope="col">거래처코드</th>
-                    <th scope="col">시작일</th>
-                    <th scope="col">종료일</th>
-                    <th scope="col">통화</th>
-                    <th scope="col">할인율</th>
-                    <th scope="col">판매단가</th>
-                    <th scope="col">최종단가</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody id="basketList">
-
-                </tbody>
-            </table>
-        </div>
-        <div class="row justify-content-center mt-4 mb-4">
-            <button style="margin-bottom: 20px" class="btn btn-secondary addBtn col-auto" id="priceSubmitButton">등록</button>
+            <div class="row justify-content-center mt-4 mb-4">
+                <button style="margin-bottom: 20px" class="btn btn-secondary addBtn col-auto" id="priceSubmitButton">
+                    등록
+                </button>
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
@@ -256,7 +272,7 @@
         const selected = buyerId.value;
 
         if (selected) {
-            $("#inputId").css("display","table")
+            $("#inputId").css("display", "table")
             document.querySelector("#itemId").disabled = true;
             document.querySelector("#itemName").disabled = true;
             document.querySelector("#buyerId").disabled = true;
@@ -372,10 +388,10 @@
                     let a = new Date(minDate);
                     let sel_day = -1;
                     a.setDate(a.getDate() + sel_day);
-                    let year    = a.getFullYear();
-                    let month   = ('0' + (a.getMonth() +  1 )).slice(-2);
-                    let day     = ('0' + a.getDate()).slice(-2);
-                    dt = year+"-"+month+"-"+day;
+                    let year = a.getFullYear();
+                    let month = ('0' + (a.getMonth() + 1)).slice(-2);
+                    let day = ('0' + a.getDate()).slice(-2);
+                    dt = year + "-" + month + "-" + day;
 
 
                     if (data.maxDate && !dt) {
@@ -411,53 +427,53 @@
 
 
         var input_empty = false;
-        $('#formId').find('input[type!="hidden"]').each(function(){
-            if(!$(this).val()) {
+        $('#formId').find('input[type!="hidden"]').each(function () {
+            if (!$(this).val()) {
                 input_empty = true;
             }
         });
-        if(input_empty == true) {
+        if (input_empty == true) {
             alert('값을 전부 입력하세요');
             document.querySelector(".addList").tBodies[0].deleteRow(emptyIndex);
         }
 
 
-       const m_item_id = document.querySelector("#itemId").value;
-       const m_buyer_id = document.querySelector("#buyerId").value;
-       const m_price_startPeriod = document.querySelector("#m_price_startPeriod").value;
-       const m_price_lastPeriod = document.querySelector("#m_price_lastPeriod").value;
-       const m_price_currency = document.querySelector("#buyerCurrency").value;
-       const m_price_discount = document.querySelector("#discountInput").value;
-       let m_price_price = document.querySelector("#priceInput").value;
-       let m_price_lastPrice = document.querySelector("#lastPrice").value;
+        const m_item_id = document.querySelector("#itemId").value;
+        const m_buyer_id = document.querySelector("#buyerId").value;
+        const m_price_startPeriod = document.querySelector("#m_price_startPeriod").value;
+        const m_price_lastPeriod = document.querySelector("#m_price_lastPeriod").value;
+        const m_price_currency = document.querySelector("#buyerCurrency").value;
+        const m_price_discount = document.querySelector("#discountInput").value;
+        let m_price_price = document.querySelector("#priceInput").value;
+        let m_price_lastPrice = document.querySelector("#lastPrice").value;
 
 
         // for (let i = 0; i <addData.length; i++) {
-       //     if (m_item_id == addData.at(i).m_item_id && m_buyer_id == addData.at(i).m_buyer_id) {
-       //         // 겹칠 때 -> 바로 안됨
-       //         if (addData.at(i).m_price_startPeriod <= m_price_startPeriod && m_price_lastPeriod <= addData.at(i).m_price_lastPeriod) {
-       //             alert("이미 추가된 판매가의 날짜가 겹칩니다. 다시 확인해주세요")
-       //             return false;
-       //         }
-       //         else { // 안 겹칠 때
-       //             // 시작 값 < 시작 배열
-       //             if (m_price_startPeriod < addData.at(i).m_price_startPeriod) {
-       //                 // 시작 배열 <= 끝 값
-       //                 if (addData.at(i).m_price_startPeriod <= m_price_lastPeriod) {
-       //                     alert("이미 추가된 판매가의 날짜가 겹칩니다. 다시 확인해주세요")
-       //                     return false;
-       //                 }
-       //             }
-       //              // 배열 시작 < 시작 값 < 배열 끝
-       //             if (addData.at(i).m_price_startPeriod < m_price_startPeriod && m_price_startPeriod < addData.at(i).m_price_lastPeriod) {
-       //                 alert("이미 추가된 판매가의 날짜가 겹칩니다. 다시 확인해주세요")
-       //                 return false;
-       //             }
-       //         }
-       //     }
-       // }
+        //     if (m_item_id == addData.at(i).m_item_id && m_buyer_id == addData.at(i).m_buyer_id) {
+        //         // 겹칠 때 -> 바로 안됨
+        //         if (addData.at(i).m_price_startPeriod <= m_price_startPeriod && m_price_lastPeriod <= addData.at(i).m_price_lastPeriod) {
+        //             alert("이미 추가된 판매가의 날짜가 겹칩니다. 다시 확인해주세요")
+        //             return false;
+        //         }
+        //         else { // 안 겹칠 때
+        //             // 시작 값 < 시작 배열
+        //             if (m_price_startPeriod < addData.at(i).m_price_startPeriod) {
+        //                 // 시작 배열 <= 끝 값
+        //                 if (addData.at(i).m_price_startPeriod <= m_price_lastPeriod) {
+        //                     alert("이미 추가된 판매가의 날짜가 겹칩니다. 다시 확인해주세요")
+        //                     return false;
+        //                 }
+        //             }
+        //              // 배열 시작 < 시작 값 < 배열 끝
+        //             if (addData.at(i).m_price_startPeriod < m_price_startPeriod && m_price_startPeriod < addData.at(i).m_price_lastPeriod) {
+        //                 alert("이미 추가된 판매가의 날짜가 겹칩니다. 다시 확인해주세요")
+        //                 return false;
+        //             }
+        //         }
+        //     }
+        // }
 
-       const priceAdd = `
+        const priceAdd = `
             <tr id="removeId">
                 <td class="priceAdd"> \${m_item_id} </td>
                 <td class="priceAdd"> \${m_buyer_id} </td>
@@ -475,23 +491,23 @@
         m_price_price = uncomma(m_price_price);
         m_price_lastPrice = uncomma(m_price_lastPrice);
 
-       const data = {
-           m_item_id,
-           m_buyer_id,
-           m_price_startPeriod,
-           m_price_lastPeriod,
-           m_price_currency,
-           m_price_discount,
-           m_price_price,
-           m_price_lastPrice
-       }
+        const data = {
+            m_item_id,
+            m_buyer_id,
+            m_price_startPeriod,
+            m_price_lastPeriod,
+            m_price_currency,
+            m_price_discount,
+            m_price_price,
+            m_price_lastPrice
+        }
         addDatas.push(data);
 
-        if(input_empty == false) {
+        if (input_empty == false) {
             // 일부 초기화
-            $('#formId').find('.reset1').each(function(i){
+            $('#formId').find('.reset1').each(function (i) {
                 $type = $(this).attr('type');
-                if($type === 'text' || $type === 'date') $(this).val('');
+                if ($type === 'text' || $type === 'date') $(this).val('');
 
 
             });
@@ -522,7 +538,7 @@
                 console.log(data)
                 if (data >= 1) {
                     alert(data + "개의 판매가 등록이 완료되었습니다.")
-                    location.href = "/price/list";
+                    location.href = "/sharedFive/price/list";
 
                 } else {
                     alert("추가된 판매가 테이블을 확인해주세요.")
@@ -538,13 +554,13 @@
         addDatas.splice(listIndex, 1)
     }
 
-    $("#inputId").css("display","none")
+    $("#inputId").css("display", "none")
 
     // 전체 초기화
-    $('#resetBtn').click(function() {
-        $('form').each(function() {
+    $('#resetBtn').click(function () {
+        $('form').each(function () {
             this.reset();
-            $("#inputId").css("display","none")
+            $("#inputId").css("display", "none")
         });
         document.querySelector("#itemId").disabled = false;
         document.querySelector("#itemName").disabled = false;
@@ -575,7 +591,6 @@
             return false;
         }
     }
-
 
 
 </script>
