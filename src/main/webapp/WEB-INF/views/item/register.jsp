@@ -30,7 +30,7 @@
             background-color: #eeeeee;
         }
 
-        .row{
+        .row {
             --bs-gutter-x: 0;
         }
 
@@ -136,11 +136,13 @@
             width: 300px;
             line-height: 35px;
         }
-        .table-active{
+
+        .table-active {
             width: 200px;
             line-height: 35px;
         }
-        .form-select{
+
+        .form-select {
             width: 100%;
         }
 
@@ -161,6 +163,10 @@
             position: relative;
         }
 
+        .gray {
+            background-color: #e9ecef;
+        }
+
     </style>
     <style>
 
@@ -175,97 +181,119 @@
     </div>
     <div class="col">
         <div class="container">
-        <div id="itemTitle">
-            <h1 id="header"><i class="fa-solid fa-pen-nib" style="margin-right: 10px;"></i>제품 등록</h1>
-            <h2>제품 추가</h2>
-        </div>
+            <div id="itemTitle">
+                <h1 id="header">제품 등록</h1>
+                <h2>제품 추가</h2>
+            </div>
 
-        <form id="itemRegisterForm" method="post">
-            <table class="table table-bordered">
-                <tbody>
-                <tr id="inputItemId">
-                    <td class="table-active">제품코드</td>
-                    <td id="itemId" colspan="3">
-                        <input type="hidden" id="realInputItemId" class="form-control" name="" value="${getItem.m_item_id}" disabled>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="table-active">제품그룹</td>
-                    <td id="itemGroup" class="inputLength" style="">
-                        <select id="groupSelect" name="m_item_group" class="form-select">
-                            <option class="" value="">=== 선택 ===</option>
-                            <option  id="modifyGroup" value="${getItem.m_item_group}">${getItem.m_item_group}</option>
-                            <c:forEach items="${groupList}" var="groupList">
-                                <option class="non" value="${groupList.m_item_group}">${groupList.m_item_group}</option>
-                            </c:forEach>
-                            <option class="GroupEditable" value="입력">입력</option>
-                        </select>
-                        <input type="hidden" class="groupEditOption form-control" value="${getItem.m_item_group}" autocomplete='off'
-                               style="width: 280px; border-bottom-right-radius: 0;border-top-right-radius: 0;">
-                    </td>
-                    <td class="table-active">제조사</td>
-                    <td id="itemManufacturer" class="inputLength">
-                        <select id="manufacturerSelect" name="m_item_manufacturer" class="form-select" value="null">
-                            <option class="" value="">=== 선택 ===</option>
-                            <option id="modifyManufacturer" value="${getItem.m_item_manufacturer}">${getItem.m_item_manufacturer}</option>
-<%--                            <c:forEach items="${manufacturerList}" var="manufacturerList">--%>
-<%--                                <option class="non"--%>
-<%--                                        value="${manufacturerList.m_item_manufacturer}">${manufacturerList.m_item_manufacturer}</option>--%>
-<%--                            </c:forEach>--%>
-                            <option class="manufacturerEditable" value="입력">입력</option>
-                        </select>
-                        <input type="hidden" class="manufacturerEditOption form-control" value="${getItem.m_item_manufacturer}" autocomplete='off'  onkeydown="activeBtn()"
-                               style="width: 280px;border-bottom-right-radius: 0;border-top-right-radius: 0;">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="table-active">제품명</td>
-                    <td id="itemName" class="inputLength">
-                        <input type="text" class="form-control" name="m_item_name" value="${getItem.m_item_name}"
-                               autocomplete='off'>
-                    </td>
-                    <td class="table-active">단위</td>
-                    <td id="itemUnit" class="inputLength">
-                        <input type="text" name="m_item_unit" class="form-control" value="EA" autocomplete='off'>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <div style="display:none"><button id="resetBtn" type="reset"></button> </div>
-        </form>
-
-        <div class="row justify-content-center">
-            <button class="btn btn-secondary col-auto" type="button" id="plusButton1">제품 추가</button>
-            <button class="btn btn-secondary col-auto" type="button" id="modifyButton1">제품 수정</button>
-        </div>
-
-        <div id="addList">
-        <h2>추가된 제품</h2>
-<%--        <form id="itemListForm" method="post">--%>
-            <div class="tableList">
-                <table class="table addList">
-                    <thead>
-                    <tr>
-                        <th scope="col" style="width:200px">제품그룹</th>
-                        <th scope="col" style="width:200px">제조사</th>
-                        <th scope="col" style="width:250px">제품명</th>
-                        <th scope="col" style="width:100px">단위</th>
-                        <th style="width:150px"></th>
+            <form id="itemRegisterForm" method="post">
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr id="inputItemId">
+                        <td class="table-active">제품코드</td>
+                        <td id="itemId" colspan="3">
+                            <input type="hidden" id="realInputItemId" class="form-control" name=""
+                                   value="${getItem.m_item_id}" disabled>
+                        </td>
                     </tr>
-                    </thead>
-                    <tbody id="itemBody">
-
+                    <tr>
+                        <td class="table-active">제품그룹</td>
+                        <td id="itemGroup" class="inputLength" style="">
+                            <c:if test="${getItem.m_item_group eq null}">
+                                <select id="groupSelect" name="m_item_group" class="form-select">
+                                    <option class="" value="">=== 선택 ===</option>
+                                    <option id="modifyGroup"
+                                            value="${getItem.m_item_group}">${getItem.m_item_group}</option>
+                                    <c:forEach items="${groupList}" var="groupList">
+                                        <option class="non"
+                                                value="${groupList.m_item_group}">${groupList.m_item_group}</option>
+                                    </c:forEach>
+                                    <option class="GroupEditable" value="입력">입력</option>
+                                </select>
+                            </c:if>
+                            <c:if test="${getItem.m_item_group ne null}">
+                                <input type="text" name="m_item_group" class="form-control gray" readonly
+                                       value="${getItem.m_item_group}">
+                            </c:if>
+                            <input type="hidden" class="groupEditOption form-control" value="${getItem.m_item_group}"
+                                   autocomplete='off'
+                                   style="width: 280px; border-bottom-right-radius: 0;border-top-right-radius: 0;">
+                        </td>
+                        <td class="table-active">제조사</td>
+                        <td id="itemManufacturer" class="inputLength">
+                            <c:if test="${getItem.m_item_manufacturer eq null}">
+                                <select id="manufacturerSelect" name="m_item_manufacturer" class="form-select"
+                                        value="null">
+                                    <option class="" value="">=== 선택 ===</option>
+                                    <option id="modifyManufacturer"
+                                            value="${getItem.m_item_manufacturer}">${getItem.m_item_manufacturer}</option>
+                                        <%--                            <c:forEach items="${manufacturerList}" var="manufacturerList">--%>
+                                        <%--                                <option class="non"--%>
+                                        <%--                                        value="${manufacturerList.m_item_manufacturer}">${manufacturerList.m_item_manufacturer}</option>--%>
+                                        <%--                            </c:forEach>--%>
+                                    <option class="manufacturerEditable" value="입력">입력</option>
+                                </select>
+                            </c:if>
+                            <c:if test="${getItem.m_item_manufacturer ne null}">
+                                <input type="text" name="m_item_manufacturer" class="form-control gray" readonly
+                                       value="${getItem.m_item_manufacturer}">
+                            </c:if>
+                            <input type="hidden" class="manufacturerEditOption form-control"
+                                   value="${getItem.m_item_manufacturer}" autocomplete='off' onkeydown="activeBtn()"
+                                   style="width: 280px;border-bottom-right-radius: 0;border-top-right-radius: 0;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="table-active">제품명</td>
+                        <td id="itemName" class="inputLength">
+                            <input type="text" class="form-control" name="m_item_name" value="${getItem.m_item_name}"
+                                   autocomplete='off'>
+                        </td>
+                        <td class="table-active">단위</td>
+                        <td id="itemUnit" class="inputLength">
+                            <input type="text" name="m_item_unit" class="form-control" value="EA" autocomplete='off'>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
-            </div>
+                <div style="display:none">
+                    <button id="resetBtn" type="reset"></button>
+                </div>
+            </form>
+
             <div class="row justify-content-center">
-                <button class="btn btn-secondary col-auto" type="button" id="submitButton" onclick="itemRegister()">제품 등록
-                </button>
+                <button class="btn btn-secondary col-auto" type="button" id="plusButton1">제품 추가</button>
+                <button class="btn btn-secondary col-auto" type="button" id="modifyButton1">제품 수정</button>
             </div>
-<%--        </form>--%>
+
+            <div id="addList">
+                <h2>추가된 제품</h2>
+                <%--        <form id="itemListForm" method="post">--%>
+                <div class="tableList">
+                    <table class="table addList">
+                        <thead>
+                        <tr>
+                            <th scope="col" style="width:200px">제품그룹</th>
+                            <th scope="col" style="width:200px">제조사</th>
+                            <th scope="col" style="width:250px">제품명</th>
+                            <th scope="col" style="width:100px">단위</th>
+                            <th style="width:150px"></th>
+                        </tr>
+                        </thead>
+                        <tbody id="itemBody">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row justify-content-center">
+                    <button class="btn btn-secondary col-auto" type="button" id="submitButton" onclick="itemRegister()">
+                        제품 등록
+                    </button>
+                </div>
+                <%--        </form>--%>
+            </div>
         </div>
     </div>
-</div>
 </div>
 </body>
 
@@ -285,7 +313,7 @@
             document.getElementById("header").innerHTML = "제품 수정"
             document.getElementById("modifyButton1").style.display = "";
             document.getElementById("plusButton1").style.display = "none"
-            document.getElementById("realInputItemId").type="text";
+            document.getElementById("realInputItemId").type = "text";
             document.getElementById("groupSelect").disabled = true;
             document.getElementById("manufacturerSelect").disabled = true;
 
@@ -341,16 +369,16 @@
         $.ajax({
             url: ctx + '/item/selectManufacturer/',
             method: 'POST',
-            data : JSON.stringify(groupValue),
+            data: JSON.stringify(groupValue),
             contentType: 'application/json; charset=UTF-8',
-            success: function(res) {
+            success: function (res) {
                 const modifyManufacturer = $("#selectNon");
                 const manufacturerEditable = $(".manufacturerEditable");
 
                 // manufacturerSelect.children('option:not(:last)').remove();
 
                 let option = '';
-                $.each(res, function(i) {
+                $.each(res, function (i) {
                     option += '<option value="' + res[i] + '">' + res[i] + '</option>';
                 });
                 manufacturerEditable.before(option);
@@ -401,17 +429,17 @@
         // 빈값 체크--------------------------------------------------------
         var input_empty = false;
         var select_empty = false;
-        $('#itemRegisterForm').find('input[type!="hidden"]').each(function(){
-            if(!$(this).val()) {
+        $('#itemRegisterForm').find('input[type!="hidden"]').each(function () {
+            if (!$(this).val()) {
                 input_empty = true;
             }
         });
-        $('.form-select option:selected').each(function(){
-            if(!$(this).val()) {
+        $('.form-select option:selected').each(function () {
+            if (!$(this).val()) {
                 select_empty = true;
             }
         })
-        if(input_empty ==true || select_empty == true) {
+        if (input_empty == true || select_empty == true) {
             alert('값을 전부 입력하세요.');
             document.querySelector(".addList").tBodies[0].deleteRow(lastIndex);
         }
@@ -530,10 +558,10 @@
         let data = {};
         for (let i = 0; i < tbodyNum.length; i++) {
             data = {
-                "m_item_group":$("input[name='m_item_group_tb']").eq(i).val(),
-                "m_item_manufacturer":$("input[name='m_item_manufacturer_tb']").eq(i).val(),
-                "m_item_name":$("input[name='m_item_name_tb']").eq(i).val(),
-                "m_item_unit":$("input[name='m_item_unit_tb']").eq(i).val()
+                "m_item_group": $("input[name='m_item_group_tb']").eq(i).val(),
+                "m_item_manufacturer": $("input[name='m_item_manufacturer_tb']").eq(i).val(),
+                "m_item_name": $("input[name='m_item_name_tb']").eq(i).val(),
+                "m_item_unit": $("input[name='m_item_unit_tb']").eq(i).val()
             };
             dataList.push(data);
         }
@@ -541,19 +569,19 @@
         $.ajax({
             url: ctx + '/item/registerList',
             method: 'POST',
-            data : JSON.stringify(dataList),
+            data: JSON.stringify(dataList),
             contentType: 'application/json; charset=UTF-8',
             success: function (resp) {
                 if (resp.cnt >= 1) {
-                alert(resp.cnt + "개의 제품 등록이 완료되었습니다.");
-                location.href = ctx + '/item/list';
+                    alert(resp.cnt + "개의 제품 등록이 완료되었습니다.");
+                    location.href = ctx + '/item/list';
                 } else {
                     alert("추가된 제품 테이블을 확인해주세요.")
                 }
             },
-            error:function(request,status,error) {
-                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-        }
+            error: function (request, status, error) {
+                alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
         })
     }
 </script>
