@@ -21,27 +21,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
             integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@200;300;400;500&display=swap" rel="stylesheet">
     <style>
+
         body {
-            font-family: 'Noto Sans KR', sans-serif;
+            font-family: 'Gothic A1', sans-serif;
+            font-weight: 200;
             background-color: #eeeeee;
         }
 
+
         .table {
-            width: 900px;
             --bs-table-bg: #fff;
         }
 
-        .table.addList {
-            --bs-table-bg: #5f7175;
-            --bs-table-color: #fff;
-            text-align: center;
-            line-height: 39px;
-            font-size: 16px;
-        }
 
-        tr {
+        tr, td {
             height: 55px;
+            line-height: 40px;
         }
 
         h1 {
@@ -49,36 +48,18 @@
             margin: 30px 0;
         }
 
-        h2 {
-            font-size: 1.1em;
-            margin: 20px 0 10px 0;
-        }
 
-        .addBtn {
-            background-color: #5f7175;
-            padding: 5px 30px;
-            margin-left: 350px;
-        }
 
-        .addBtn:hover,
-        .addBtn:focus, .storageBtn:hover, .storageBtn.focus {
-            background-color: #505f62;
-        }
-
-        .storageBtn {
-            background-color: #5f7175;
-            padding: 5px 30px;
-            margin-left: 280px;
-        }
-
-        .submitBtn {
+        #submitBtn  {
             background-color: #598f9b;
-            padding: 5px 30px;
-
+            border-color: #598f9b;
+            color:#fff;
+            padding : 5px 30px;
         }
 
-        .form-select {
+        .table-active {
             width: 250px;
+
         }
 
         .form-control {
@@ -86,109 +67,110 @@
         }
 
         .inputLength {
-            width: 250px;
+            width: 400px;
         }
 
-
-        /*제품그룹 박스*/
-        #groupSelect, #manufacturerSelect {
-            position: absolute;
-        }
 
         option {
             height: 30px;
             line-height: 30px;
         }
 
-        .groupEditOption, .ManufacturerEditOption {
-            position: relative;
-        }
+
     </style>
 </head>
 <body>
 <input type="hidden" value="${member.m_member_email}" id="memberEmail">
 <div class="row">
-    <div class="col-3">
+    <div class="col-6 col-sm-2">
         <my:header></my:header>
     </div>
     <div class="col">
-
-        <table class="table">
-            <thead>
-            <tr>
-                <td>이름</td>
-                <td>${member.m_member_id}</td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    이메일
-                </td>
-                <td>
-                    ${member.m_member_email }
-                </td>
-            </tr>
-            <tr>
-                <td>직급</td>
-                <td>${member.m_authority_grade}</td>
-            </tr>
-            <form method="post" enctype="multipart/form-data" action="" id="changePassword">
+        <div class="container">
+            <h1><i class="fa-solid fa-pen-nib" style="margin-right: 10px;"></i>회원정보 수정</h1>
+            <table class="table">
+                <thead>
                 <tr>
-                    <td>
-                        기존비번
+                    <td class="table-active">이름</td>
+                    <td>${member.m_member_id}</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="table-active">
+                        이메일
                     </td>
                     <td>
-                        <input type="text" id="oldPassword" name="oldPassword">
-                        <div style="color: red" id="inputText"></div>
+                        ${member.m_member_email }
                     </td>
                 </tr>
-                <div id="passwordDiv" style="display: none">
+                <tr>
+                    <td class="table-active">직급</td>
+                    <td>${member.m_authority_grade}</td>
+                </tr>
+                <form method="post" enctype="multipart/form-data" action="" id="changePassword">
                     <tr>
-                        <td>
-                            새비번
+                        <td class="table-active">
+                            기존비번
                         </td>
                         <td>
-                            <input type="password" id="newPassword1">
+                            <%--                        <input type="text" id="oldPassword" name="oldPassword" class="inputLength">--%>
+                            <input class="form-control inputLength" type="text"
+                                   aria-label="default input example" id="oldPassword" name="oldPassword">
+                        </td>
+                        <div style="color: red" id="inputText"></div>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            새비번확인
-                        </td>
-                        <td>
-                            <input type="password" id="newPassword2" name="m_member_password">
-                            <div style="color: red" id="newPassword2Text"></div>
-                        </td>
-                        <td style="background-color: #eeeeee; border-bottom: none">
-                            <input type="submit" class="btn btn-primary" value="전송" disabled id="submitBtn">
-                        </td>
-                    </tr>
-                </div>
-
-            </form>
-            </tbody>
-        </table>
-        <div class="modal fade" id="modifyModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 style="font-family: 'LINESeedKR-Bd'" class="modal-title fs-5" id="exampleModalLabel">수정
-                            확인</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div id="passwordDiv" style="display: none">
+                        <tr>
+                            <td class="table-active">
+                                새비번
+                            </td>
+                            <td>
+                                <%--                            <input type="password" class="inputLength" id="newPassword1">--%>
+                                <input class="form-control inputLength" type="password"
+                                       aria-label="default input example" id="newPassword1">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table-active">
+                                새비번확인
+                            </td>
+                            <td>
+                                <%--                            <input type="password" class="inputLength" id="newPassword2" name="m_member_password">--%>
+                                <input class="form-control inputLength" type="password"
+                                       aria-label="default input example" id="newPassword2" name="m_member_password">
+                                <div style="color: red" id="newPassword2Text"></div>
+                            </td>
+                        </tr>
                     </div>
-                    <div class="modal-body">
-                        수정하시겠습니까?
-                    </div>
-                    <div class="modal-footer">
-                        <button style="font-family: 'LINESeedKR-Bd'" type="button" class="btn btn-secondary"
-                                data-bs-dismiss="modal">취소
-                        </button>
-                        <button style="font-family: 'LINESeedKR-Bd'" id="modifyConfirmButton" type="button"
-                                class="btn btn-primary">
-                            확인
-                        </button>
+                </form>
+                </tbody>
+            </table>
+            <div>
+                <input type="submit" class="btn" value="수정" disabled id="submitBtn">
+            </div>
+            <div class="modal fade" id="modifyModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 style="font-family: 'LINESeedKR-Bd'" class="modal-title fs-5" id="exampleModalLabel">수정
+                                확인</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            수정하시겠습니까?
+                        </div>
+                        <div class="modal-footer">
+                            <button style="font-family: 'LINESeedKR-Bd'" type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">취소
+                            </button>
+                            <button style="font-family: 'LINESeedKR-Bd'" id="modifyConfirmButton" type="button"
+                                    class="btn btn-primary">
+                                확인
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -265,6 +247,7 @@
                         $('#inputText').css("color", "black");
                     })
                     document.querySelector('#passwordDiv').style.display = "block";
+
                     return checkedOldPassword = true;
                 }
             })
