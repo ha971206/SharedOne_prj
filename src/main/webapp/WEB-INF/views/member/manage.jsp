@@ -18,10 +18,63 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
           integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,300">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
             integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
+        .pagination {
+            position: relative;
+            justify-content: center;
+            height: 50px;
+            /*right: 10%;*/
+        }
+        .pagination a {
+            z-index: 2;
+            position: relative;
+            display: inline-block;
+            color: #2c3e50;
+            text-decoration: none;
+            /*font-size: 1.2rem;*/
+            padding: 9px 15px 4px;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .pagination a:before {
+            z-index: -1;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            content: "";
+            top: 0;
+            left: 0;
+            background-color: #2c3e50;
+            border-radius: 24px;
+            transform: scale(0);
+            transition: all 0.2s;
+        }
+        .pagination a:hover,
+        .pagination a .pagination-active {
+            color: #fff;
+        }
+        .pagination a:hover:before,
+        .pagination a .pagination-active:before {
+            transform: scale(1);
+        }
+        .pagination .pagination-active {
+            color: #fff;
+        }
+        .pagination .pagination-active:before {
+            transform: scale(1);
+        }
+        .pagination-newer, .pagination-older {
+            border-style: solid;
+            border-width: 0;
+            border-radius: 20px;
+            padding: 9px 10px !important;
+            margin-bottom: 13px;
+        }
+
         .itemRegisterBtn {
             position: relative;
         }
@@ -87,6 +140,10 @@
             width: 100px;
             --bs-btn-font-weight: 600;
             border: none;
+        }
+
+        .row {
+            --bs-gutter-x: 0;
         }
 
         .searchBox {
@@ -251,7 +308,7 @@
                                             aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                        "${member.m_member_id }" 님을 삭제하시겠습니까?
+                                    "${member.m_member_id }" 님을 삭제하시겠습니까?
                                 </div>
                                 <div class="modal-footer">
                                     <button style="font-family: 'LINESeedKR-Bd'" type="button" class="btn btn-secondary"
@@ -275,8 +332,8 @@
             </table>
             <div class="row">
                 <div class="col">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
+                    <nav aria-label="pagination-container" style="background-color: #fff">
+                        <div class="pagination">
 
                             <%-- 맨앞 버튼( 1페이지가 아니면 생김) --%>
                             <c:if test="${memberDto.currentPageNumber ne 1 }">
@@ -284,22 +341,18 @@
                                     <c:param name="page" value="1"/>
                                 </c:url>
                                 <%-- 맨앞 버튼 --%>
-                                <li class="page-item">
-                                    <a href="${listLink }" class="page-link">
-                                        <i class="fa-solid fa-angles-left"></i>
-                                    </a>
-                                </li>
+                                <a href="${listLink }" class="pagination-newer">
+                                    <i class="bi bi-chevron-double-left"></i>
+                                </a>
                             </c:if>
 
                             <c:if test="${memberDto.hasPrevButton }">
                                 <c:url value="/member/manage" var="listLink">
                                     <c:param name="page" value="${memberDto.jumpPrevPageNumber }"></c:param>
                                 </c:url>
-                                <li class="page-item">
-                                    <a href="${listLink }" class="page-link">
-                                        <i class="fa-solid fa-angle-left"></i>
-                                    </a>
-                                </li>
+                                <a href="${listLink }" class="pagination-newer">
+                                    <i class="bi bi-chevron-left"></i>
+                                </a>
                             </c:if>
 
                             <c:forEach begin="${memberDto.leftPageNumber}" end="${memberDto.rightPageNumber}"
@@ -307,13 +360,11 @@
                                 <c:url value="/member/manage" var="listLink">
                                     <c:param name="page" value="${pageNumber }"/>
                                 </c:url>
-                                <li class="page-item
-
-                  <%-- 현재페이지에 active 클래스 추가 --%>
-                  ${memberDto.currentPageNumber eq pageNumber ? 'active' : ''} }
-
-                  "><a class="page-link" href="${listLink}">${pageNumber}</a>
-                                </li>
+                                <span class="pagination-inner">
+                              <%-- 현재페이지에 active 클래스 추가 --%>
+                                <a class="${buyerDto.currentPageNumber eq pageNumber ? 'pagination-active' : ''}"
+                                   href="${listLink}">${pageNumber}</a>
+                            </span>
                             </c:forEach>
 
                             <%-- 다음 버튼 --%>
@@ -321,11 +372,9 @@
                                 <c:url value="/member/manage" var="listLink">
                                     <c:param name="page" value="${memberDto.jumpNextPageNumber }"></c:param>
                                 </c:url>
-                                <li class="page-item">
-                                    <a href="${listLink }" class="page-link">
-                                        <i class="fa-solid fa-angle-right"></i>
-                                    </a>
-                                </li>
+                                <a href="${listLink }" class="pagination-older">
+                                    <i class="bi bi-chevron-right"></i>
+                                </a>
                             </c:if>
 
                             <%-- 맨뒤 버튼 --%>
@@ -333,20 +382,23 @@
                                 <c:url value="/member/manage" var="listLink">
                                     <c:param value="${memberDto.lastPageNumber }" name="page"/>
                                 </c:url>
-                                <li class="page-item">
-                                    <a href="${listLink }" class="page-link">
-                                        <i class="fa-solid fa-angles-right"></i>
-                                    </a>
-                                </li>
+                                <a href="${listLink }" class="pagination-older">
+                                    <i class="bi bi-chevron-double-right"></i>
+                                </a>
                             </c:if>
-                        </ul>
+                        </div>
                     </nav>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+<script>
+    $('.pagination-inner a').on('click', function () {
+        $(this).siblings().removeClass('pagination-active');
+        $(this).addClass('pagination-active');
+    })
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
