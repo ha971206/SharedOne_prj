@@ -20,32 +20,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
             integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@200;300;400;500&display=swap" rel="stylesheet">
     <style>
+
         body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background-color: #eeeeee;
+            font-family: 'Gothic A1', sans-serif;
+            font-weight: 200;
+            background-color: #353535;
         }
 
-        .table {
-            width: 900px;
-            --bs-table-bg: #fff;
-        }
-
-        .table.addList {
-            --bs-table-bg: #5f7175;
-            --bs-table-color: #fff;
-            text-align: center;
-            line-height: 39px;
-            font-size: 16px;
-        }
-
-        tr {
-            height: 55px;
-        }
 
         h1 {
-            font-size: 1.7em;
+            font-size: 2em;
             margin: 30px 0;
+            font-weight: 500;
+            text-align: center;
         }
 
         h2 {
@@ -53,45 +44,18 @@
             margin: 20px 0 10px 0;
         }
 
-        .addBtn {
-            background-color: #5f7175;
-            padding: 5px 30px;
-            margin-left: 350px;
-        }
-
-        .addBtn:hover,
-        .addBtn:focus, .storageBtn:hover, .storageBtn.focus {
-            background-color: #505f62;
-        }
-
-        .storageBtn {
-            background-color: #5f7175;
-            padding: 5px 30px;
-            margin-left: 280px;
-        }
 
         .submitBtn {
             background-color: #598f9b;
-            padding: 5px 30px;
-
+            border-color: #598f9b;
+            padding: 8px 40px;
+            margin-top: 10px;
         }
 
-        .form-select {
-            width: 250px;
-        }
-
-        .form-control {
-            width: 250px;
-        }
-
-        .inputLength {
-            width: 250px;
-        }
-
-
-        /*제품그룹 박스*/
-        #groupSelect, #manufacturerSelect {
-            position: absolute;
+        .submitBtn:hover,
+        .submitBtn:focus{
+            background-color: #52727b;
+            border-color: #52727b;
         }
 
         option {
@@ -99,34 +63,48 @@
             line-height: 30px;
         }
 
-        .groupEditOption, .ManufacturerEditOption {
-            position: relative;
-        }
 
         body {
             background-image: url("/static/img/cat-space.gif");
         }
+
+        .input-group-text{
+            width: 150px;
+            line-height: 30px;
+            background-color: #eeeeee;
+        }
+
+        .input-group{
+            height: 44px;
+        }
+        .card-body{
+            width: 500px;
+            height: 340px;
+        }
     </style>
 </head>
-<body class="align-middle">
+<body>
 <div class="container-fluid d-flex justify-content-center" style="height: 100vh">
-
     <div class="card align-self-center">
         <div class="card-body">
 
-            <h1>로그인</h1>
+            <h1>login</h1>
 
-            <form id="registerForm" action="/member/login" method="post">
+            <form id="registerForm" action="/sharedFive/member/login" method="post">
                 <div class="input-group mb-3">
-                    <span class="input-group-text">사원이메일</span>
+                    <span class="input-group-text">
+                         <i class="fa-solid fa-user-large" style="margin-right: 10px"></i>
+                        사원 이메일</span>
                     <input type="text" name="username" class="form-control" placeholder="이메일">
                 </div>
                 <div class="input-group mb-3">
-                    <span class="input-group-text">비밀번호</span>
+                    <span class="input-group-text">
+                        <i class="fa-solid fa-key" style="margin-right: 10px"></i>
+                        비밀번호</span>
                     <input type="password" name="password" class="form-control" placeholder="비밀번호">
                 </div>
-                <div class="my-4">
-                    <div class="float-end">
+                <div class="my-4 row justify-content-center">
+                    <div class="float-end col-auto">
                         <button type="submit" class="btn btn-primary submitBtn">로그인</button>
                     </div>
                 </div>
